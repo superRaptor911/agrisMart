@@ -1,13 +1,23 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { isEmailverified } from "../api/api";
+import FarmerComponent from "../components/FarmerComponent";
 import FarmerDashIndicator from "../components/FarmerDashIndicator";
 import FarmerSidebar from "../components/FarmerSidebar";
 import bgImg from "../media/farmerDashboardbg.png";
+import { useStore } from "../store";
 import { getCurrentCity } from "../utility";
 
 const FarmerDashboard = () => {
   const [location, setLocation] = useState<any>("");
+  const navigate = useNavigate();
+  const setUser = useStore((state) => state.setUser);
 
   useEffect(() => {
+    if (!isEmailverified()) {
+      setUser(null);
+      navigate("/email");
+    }
     getCurrentCity().then((city) => setLocation(city));
   }, []);
 
@@ -25,16 +35,27 @@ const FarmerDashboard = () => {
       />
 
       <div
-        className="button3"
         style={{
+          display: "flex",
+          alignItems: "center",
           width: "max-content",
           position: "absolute",
           top: 50,
-          left: "90%",
+          left: "82%",
         }}
       >
-        {location}
+        <div
+          className="button3"
+          style={{
+            width: "max-content",
+            marginRight: 27,
+          }}
+        >
+          {location}
+        </div>
+        <FarmerComponent />
       </div>
+
       <FarmerSidebar />
 
       <div

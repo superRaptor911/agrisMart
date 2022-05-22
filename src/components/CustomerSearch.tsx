@@ -25,7 +25,15 @@ const CustomerSearch = () => {
           alignItems: "center",
         }}
       >
-        <div className="button3">{location}</div>
+        <div
+          className="button3"
+          style={{
+            paddingLeft: 85,
+            paddingRight: 85,
+          }}
+        >
+          {location}
+        </div>
         <img src={icon} style={{ width: 190, height: 106, margin: "auto" }} />
         <div
           className="button3"
@@ -60,6 +68,12 @@ const CustomerSearch = () => {
       >
         <button
           className="button3"
+          style={{
+            paddingTop: 10,
+            paddingBottom: 10,
+            paddingLeft: 85,
+            paddingRight: 85,
+          }}
           onClick={() => {
             setSQ("fruits");
             navigate("/searchresults");
@@ -69,6 +83,12 @@ const CustomerSearch = () => {
         </button>
         <button
           className="button3"
+          style={{
+            paddingTop: 10,
+            paddingBottom: 10,
+            paddingLeft: 85,
+            paddingRight: 85,
+          }}
           onClick={() => {
             setSQ("vegetable");
             navigate("/searchresults");

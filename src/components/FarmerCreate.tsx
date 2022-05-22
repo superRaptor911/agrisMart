@@ -54,20 +54,26 @@ const FarmerCreate = () => {
       />
 
       <div className="inputLabel2">Quantity</div>
-      <input
-        className="inputField2"
-        value={quantity}
-        onChange={(e) => setQuantity(e.target.value)}
-        style={{ marginBottom: 13 }}
-      />
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <input
+          className="inputField2"
+          value={quantity}
+          onChange={(e) => setQuantity(e.target.value)}
+          style={{ marginBottom: 13 }}
+        />
+        <div style={{ marginLeft: 10, fontSize: 20 }}>Kg</div>
+      </div>
 
       <div className="inputLabel2">Amount/kg</div>
-      <input
-        className="inputField2"
-        value={price}
-        onChange={(e) => setPrice(e.target.value)}
-        style={{ marginBottom: 13 }}
-      />
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <input
+          className="inputField2"
+          value={price}
+          onChange={(e) => setPrice(e.target.value)}
+          style={{ marginBottom: 13 }}
+        />
+        <div style={{ marginLeft: 10, fontSize: 28 }}>₹</div>
+      </div>
 
       <div className="inputLabel2">Product type</div>
       <select

@@ -1,4 +1,5 @@
 import FarmerAvailableProducts from "../components/FarmerAvailableProducts";
+import FarmerComponent from "../components/FarmerComponent";
 import FarmerSidebar from "../components/FarmerSidebar";
 import bgImg from "../media/farmerDashboardbg3.png";
 
@@ -26,6 +27,19 @@ const FarmerDashboard3 = () => {
           marginLeft: 100,
         }}
       ></div>
+
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          width: "max-content",
+          position: "absolute",
+          top: 50,
+          left: "90%",
+        }}
+      >
+        <FarmerComponent />
+      </div>
 
       <div
         style={{

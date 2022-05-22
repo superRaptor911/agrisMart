@@ -1,8 +1,6 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
-import CreateItem from "./pages/CreateItem";
-import SensorData from "./pages/SensorData";
 import FarmerLogin from "./pages/FarmerLogin";
 import CustomerLogin from "./pages/CustomerLogin";
 import CustomerRegister from "./pages/CustomerRegister";
@@ -13,6 +11,7 @@ import FarmerDashboard3 from "./pages/FarmerDashboard3";
 import CustomerDashboard from "./pages/CustomerDashboard";
 import SearchResults from "./pages/SearchResults";
 import Cart from "./pages/Cart";
+import EmailVerified from "./pages/EmailVerified";
 
 function App() {
   return (
@@ -30,9 +29,7 @@ function App() {
           <Route path="/customerdashboard" element={<CustomerDashboard />} />
           <Route path="/searchresults" element={<SearchResults />} />
           <Route path="/cart" element={<Cart />} />
-
-          <Route path="/createitem" element={<CreateItem />} />
-          <Route path="/sensordata" element={<SensorData />} />
+          <Route path="/email" element={<EmailVerified />} />
         </Routes>
       </BrowserRouter>
     </div>

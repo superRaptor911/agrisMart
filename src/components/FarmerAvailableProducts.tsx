@@ -39,17 +39,24 @@ const FarmItem = ({ name, quantity, price, image }: FarmItemProps) => {
 
       <div style={{ width: 161 }}>
         <div className="inputLabel2">Quantity</div>
-        <input
-          className="inputField2"
-          value={quantity}
-          style={{ marginBottom: 13 }}
-        />
 
-        <input
-          className="inputField2"
-          value={price}
-          style={{ marginBottom: 13 }}
-        />
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <input
+            className="inputField2"
+            value={quantity}
+            style={{ marginBottom: 13 }}
+          />
+          Kg
+        </div>
+
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <input
+            className="inputField2"
+            value={price}
+            style={{ marginBottom: 13 }}
+          />
+          /Kg
+        </div>
       </div>
 
       <img

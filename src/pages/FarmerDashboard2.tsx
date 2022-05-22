@@ -1,3 +1,4 @@
+import FarmerComponent from "../components/FarmerComponent";
 import FarmerCreate from "../components/FarmerCreate";
 import FarmerSidebar from "../components/FarmerSidebar";
 import bgImg from "../media/farmerDashboardbg2.png";
@@ -17,6 +18,18 @@ const FarmerDashboard2 = () => {
       />
       <FarmerSidebar />
 
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          width: "max-content",
+          position: "absolute",
+          top: 50,
+          left: "90%",
+        }}
+      >
+        <FarmerComponent />
+      </div>
       <div
         style={{
           margin: 80,

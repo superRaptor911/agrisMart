@@ -5,6 +5,7 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  sendEmailVerification,
 } from "firebase/auth";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { getCurrentCity } from "../utility";
@@ -59,6 +60,10 @@ export async function api_loginUser(
   }
 }
 
+export function isEmailverified() {
+  return auth.currentUser?.emailVerified;
+}
+
 export async function api_registerUSer(
   name: string,
   location: string,
@@ -85,6 +90,12 @@ export async function api_registerUSer(
         location: userlocation,
       });
 
+      try {
+        await sendEmailVerification(user);
+      } catch (e) {
+        /* handle error */
+        console.error("failed to send verification email", e);
+      }
       return user.uid;
     } else {
       throw "Failed to signup";

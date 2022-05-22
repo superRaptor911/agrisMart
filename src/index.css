@@ -186,3 +186,34 @@ code {
     color: #000000;
     height: max-content;
 }
+
+.slider {
+  animation-duration: 1s;
+  animation-name: slidein;
+}
+
+.slider2 {
+  animation-duration: 1s;
+  animation-name: slidein2;
+}
+
+
+@keyframes slidein {
+  from {
+    width: 0px;
+  }
+
+  to {
+    width: 615px;
+  }
+}
+
+@keyframes slidein2 {
+  from {
+    width: 1px;
+  }
+
+  to {
+    width: 615px;
+  }
+}

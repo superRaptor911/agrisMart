@@ -1,10 +1,12 @@
 import homeBtn from "../media/homeBtn.png";
 import createBtn from "../media/createBtn.png";
 import shopBtn from "../media/marketBtn.png";
-import { useNavigate } from "react-router-dom";
+import circle from "../media/circle.png";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const FarmerSidebar = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   return (
     <div
       style={{
@@ -30,17 +32,17 @@ const FarmerSidebar = () => {
         }}
       >
         <img
-          src={homeBtn}
+          src={location.pathname == "/farmerdashboard" ? circle : homeBtn}
           style={{ width: 30 }}
           onClick={() => navigate("/farmerdashboard")}
         />
         <img
-          src={createBtn}
+          src={location.pathname == "/farmerdashboard2" ? circle : createBtn}
           style={{ width: 30 }}
           onClick={() => navigate("/farmerdashboard2")}
         />
         <img
-          src={shopBtn}
+          src={location.pathname == "/farmerdashboard3" ? circle : shopBtn}
           style={{ width: 30 }}
           onClick={() => navigate("/farmerdashboard3")}
         />

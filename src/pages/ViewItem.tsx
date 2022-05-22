@@ -2,13 +2,12 @@ import { useEffect, useState } from "react";
 import icon from "../media/agrismart_logo.png";
 import icon2 from "../media/binIcon.png";
 import bg from "../media/customerDashBg3.png";
-import viewIcon from "../media/viewIcon.png";
 
 import { FarmItemProps } from "../types";
 import { useStore } from "../store";
 import CustomerSidebar from "../components/CustomerSidebar";
 import { getCurrentCity } from "../utility";
-import { useNavigate } from "react-router-dom";
+import { api_getItems } from "../api/api";
 
 const FarmItem = ({
   name,
@@ -16,11 +15,7 @@ const FarmItem = ({
   quantity,
   price,
   image,
-  location,
-  type,
 }: FarmItemProps) => {
-  const setSelectedItem = useStore((state) => state.setSelectedItem);
-  const navigate = useNavigate();
   return (
     <div
       style={{
@@ -68,13 +63,6 @@ const FarmItem = ({
           />
           <div style={{ marginLeft: 1, fontSize: 20 }}>₹/kg</div>
         </div>
-
-        <div className="inputLabel2">Farmer name</div>
-        <input
-          className="inputField2"
-          value={farmerName}
-          style={{ marginBottom: 13 }}
-        />
       </div>
 
       <img
@@ -87,32 +75,6 @@ const FarmItem = ({
           height: 180,
           borderRadius: 90,
           objectFit: "cover",
-        }}
-      />
-
-      <img
-        src={viewIcon}
-        style={{
-          width: 20,
-          height: 11,
-          position: "absolute",
-          left: "92.99%",
-          right: "55.66%",
-          top: "89%",
-          bottom: "9.72%",
-        }}
-        onClick={() => {
-          setSelectedItem({
-            name: name,
-            farmerName: farmerName,
-            quantity: quantity,
-            price: price,
-            image: image,
-            uid: "",
-            location: location,
-            type: type,
-          });
-          navigate("/view");
         }}
       />
     </div>
@@ -180,9 +142,10 @@ const FarmItemSideMenu = ({ price, uid }: FarmItemProps) => {
   );
 };
 
-const Cart = () => {
-  const products = useStore((state) => state.cartItems);
+const ViewItem = () => {
+  const selectedItem = useStore((state) => state.selectedItem);
   const [location, setLocation] = useState<any>("");
+
   useEffect(() => {
     getCurrentCity().then((city) => setLocation(city));
   }, []);
@@ -215,21 +178,6 @@ const Cart = () => {
       >
         {location}
       </div>
-      <div
-        style={{
-          background: "#A1ACAB",
-          border: "1px solid #2B342D",
-          boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-          borderRadius: "15px",
-          width: "max-content",
-          marginLeft: 150,
-          padding: 10,
-          paddingLeft: 30,
-          paddingRight: 30,
-        }}
-      >
-        Cart
-      </div>
       <div style={{ marginLeft: 150, marginTop: 12 }}>
         <div
           style={{
@@ -244,33 +192,107 @@ const Cart = () => {
             padding: 38,
           }}
         >
-          {products.map((item) => (
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <FarmItem
-                name={item.name}
-                quantity={item.quantity}
-                price={item.price}
-                image={item.image}
-                farmerName={item.farmerName}
-                uid={item.uid}
-                type={item.type}
-                location={item.location}
-              />
+          {selectedItem && (
+            <>
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <FarmItem
+                  name={selectedItem.name}
+                  quantity={selectedItem.quantity}
+                  price={selectedItem.price}
+                  image={selectedItem.image}
+                  farmerName={selectedItem.farmerName}
+                  uid={selectedItem.uid}
+                />
 
-              <FarmItemSideMenu
-                name={item.name}
-                quantity={item.quantity}
-                price={item.price}
-                image={item.image}
-                farmerName={item.farmerName}
-                uid={item.uid}
-              />
-            </div>
-          ))}
+                <FarmItemSideMenu
+                  name={selectedItem.name}
+                  quantity={selectedItem.quantity}
+                  price={selectedItem.price}
+                  image={selectedItem.image}
+                  farmerName={selectedItem.farmerName}
+                  uid={selectedItem.uid}
+                />
+              </div>
+
+              <div
+                style={{
+                  width: "774px",
+                  height: "141px",
+                  background: "#A1ACAB",
+                  border: "1px solid #3A5C58",
+                  boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+                  borderRadius: "20px",
+                  display: "flex",
+                  padding: 28,
+                  paddingTop: 34,
+                  justifyContent: "space-between",
+                  margin: "auto",
+                }}
+              >
+                <div>
+                  <div>Farmer Name</div>
+                  <div
+                    style={{
+                      width: "160px",
+                      height: "40px",
+                      background: "#3A5C58",
+                      boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+                      borderRadius: "60px",
+                      margin: "auto",
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                    }}
+                  >
+                    {selectedItem.farmerName}
+                  </div>
+                </div>
+
+                <div>
+                  <div>Location</div>
+                  <div
+                    style={{
+                      width: "160px",
+                      height: "40px",
+                      background: "#3A5C58",
+                      boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+                      borderRadius: "60px",
+                      margin: "auto",
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                    }}
+                  >
+                    {selectedItem.location}
+                  </div>
+                </div>
+
+                <div>
+                  <div>Type</div>
+                  <div
+                    style={{
+                      width: "160px",
+                      height: "40px",
+                      background: "#3A5C58",
+                      boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+                      borderRadius: "60px",
+                      margin: "auto",
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                    }}
+                  >
+                    {selectedItem.type}
+                  </div>
+                </div>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>
   );
 };
 
-export default Cart;
+export default ViewItem;
+

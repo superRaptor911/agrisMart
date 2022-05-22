@@ -5,4 +5,6 @@ export interface FarmItemProps {
   image: string;
   farmerName: string;
   uid: string;
+  location?: string;
+  type?: string;
 }

@@ -16,6 +16,8 @@ interface Store {
   removeItem: (uid: string) => void;
   searchQuery: string;
   setSearchQuery: (val: string) => void;
+  selectedItem: null | FarmItemProps;
+  setSelectedItem: (item: FarmItemProps) => void;
 }
 
 export const useStore = create<Store>()(
@@ -36,6 +38,8 @@ export const useStore = create<Store>()(
         set({ cartItems: get().cartItems.filter((item) => item.uid != uid) }),
       searchQuery: "",
       setSearchQuery: (val: string) => set({ searchQuery: val }),
+      selectedItem: null,
+      setSelectedItem: (item: FarmItemProps) => set({ selectedItem: item }),
     }),
     { name: "main-storage" }
   )

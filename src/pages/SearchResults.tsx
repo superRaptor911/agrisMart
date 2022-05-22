@@ -6,8 +6,9 @@ import bg from "../media/customerDashBg3.png";
 import { useStore } from "../store";
 import { FarmItemProps } from "../types";
 import Fuse from "fuse.js";
-import EmptySidebar from "../components/EmptySidebar";
 import CustomerSidebar from "../components/CustomerSidebar";
+import viewIcon from "../media/viewIcon.png";
+import { useNavigate } from "react-router-dom";
 
 const FarmItem = ({
   name,
@@ -16,7 +17,11 @@ const FarmItem = ({
   price,
   image,
   uid,
+  location,
+  type,
 }: FarmItemProps) => {
+  const setSelectedItem = useStore((state) => state.setSelectedItem);
+  const navigate = useNavigate();
   return (
     <div
       style={{
@@ -83,6 +88,32 @@ const FarmItem = ({
           height: 180,
           borderRadius: 90,
           objectFit: "cover",
+        }}
+      />
+
+      <img
+        src={viewIcon}
+        style={{
+          width: 20,
+          height: 11,
+          position: "absolute",
+          left: "92.99%",
+          right: "55.66%",
+          top: "89%",
+          bottom: "9.72%",
+        }}
+        onClick={() => {
+          setSelectedItem({
+            name: name,
+            farmerName: farmerName,
+            quantity: quantity,
+            price: price,
+            image: image,
+            uid: "",
+            location: location,
+            type: type,
+          });
+          navigate("/view");
         }}
       />
     </div>
@@ -228,6 +259,8 @@ const SearchResults = () => {
                 image={item.image}
                 farmerName={item.farmerName}
                 uid={item.uid}
+                type={item.type}
+                location={item.location}
               />
 
               <FarmItemSideMenu

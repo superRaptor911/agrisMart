@@ -12,6 +12,7 @@ import CustomerDashboard from "./pages/CustomerDashboard";
 import SearchResults from "./pages/SearchResults";
 import Cart from "./pages/Cart";
 import EmailVerified from "./pages/EmailVerified";
+import ViewItem from "./pages/ViewItem";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="/searchresults" element={<SearchResults />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/email" element={<EmailVerified />} />
+          <Route path="/view" element={<ViewItem />} />
         </Routes>
       </BrowserRouter>
     </div>

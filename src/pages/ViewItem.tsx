@@ -242,6 +242,7 @@ const ViewItem = () => {
                       display: "flex",
                       flexDirection: "column",
                       justifyContent: "center",
+                      color: "white",
                     }}
                   >
                     {selectedItem.farmerName}
@@ -261,6 +262,7 @@ const ViewItem = () => {
                       display: "flex",
                       flexDirection: "column",
                       justifyContent: "center",
+                      color: "white",
                     }}
                   >
                     {selectedItem.location}
@@ -280,6 +282,7 @@ const ViewItem = () => {
                       display: "flex",
                       flexDirection: "column",
                       justifyContent: "center",
+                      color: "white",
                     }}
                   >
                     {selectedItem.type}

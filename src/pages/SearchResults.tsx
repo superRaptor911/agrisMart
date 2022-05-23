@@ -127,8 +127,10 @@ const FarmItemSideMenu = ({
   price,
   image,
   uid,
+  location,
+  type,
 }: FarmItemProps) => {
-  const [amount, setAmount] = useState("1");
+  const [amount, setAmount] = useState<string | number>("1");
   const [total, setTotal] = useState("");
   const addTocart = useStore((state) => state.addItem);
 
@@ -150,7 +152,11 @@ const FarmItemSideMenu = ({
         type="number"
         value={amount}
         style={{ marginBottom: 13 }}
-        onChange={(e) => setAmount(e.target.value)}
+        onChange={(e) => {
+          const num = Number(e.target.value);
+          const num2 = Number(quantity);
+          setAmount(num > num2 ? num2 : num);
+        }}
       />
 
       <div className="inputLabel2">Total Amount</div>
@@ -182,6 +188,8 @@ const FarmItemSideMenu = ({
               price,
               image,
               uid,
+              location,
+              type,
             })
           }
         />
@@ -270,6 +278,8 @@ const SearchResults = () => {
                 image={item.image}
                 farmerName={item.farmerName}
                 uid={item.uid}
+                type={item.type}
+                location={item.location}
               />
             </div>
           ))}

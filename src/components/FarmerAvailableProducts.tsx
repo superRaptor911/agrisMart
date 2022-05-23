@@ -1,15 +1,10 @@
 import { useEffect, useState } from "react";
-import { api_getItems } from "../api/api";
+import { api_deleteItem, api_getItems } from "../api/api";
 import { useStore } from "../store";
+import deleteIcon from "../media/binIcon.png";
+import { FarmItemProps } from "../types";
 
-interface FarmItemProps {
-  name: string;
-  quantity: string | number;
-  price: string | number;
-  image: string;
-}
-
-const FarmItem = ({ name, quantity, price, image }: FarmItemProps) => {
+const FarmItem = ({ name, quantity, price, image, uid }: FarmItemProps) => {
   return (
     <div
       style={{
@@ -71,6 +66,19 @@ const FarmItem = ({ name, quantity, price, image }: FarmItemProps) => {
           objectFit: "cover",
         }}
       />
+
+      <img
+        src={deleteIcon}
+        style={{
+          position: "absolute",
+          width: 25,
+          height: 25,
+          left: 20,
+        }}
+        onClick={() => {
+          api_deleteItem(uid).then(() => window.location.reload());
+        }}
+      />
     </div>
   );
 };
@@ -90,9 +98,11 @@ const FarmerAvailableProducts = () => {
       {products.map((item) => (
         <FarmItem
           name={item.name}
+          farmerName={item.farmerName}
           quantity={item.quantity}
           price={item.price}
           image={item.image}
+          uid={item.uid}
         />
       ))}
     </div>

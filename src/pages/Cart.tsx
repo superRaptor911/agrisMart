@@ -119,8 +119,8 @@ const FarmItem = ({
   );
 };
 
-const FarmItemSideMenu = ({ price, uid }: FarmItemProps) => {
-  const [amount, setAmount] = useState("1");
+const FarmItemSideMenu = ({ price, uid, quantity }: FarmItemProps) => {
+  const [amount, setAmount] = useState<string | number>("1");
   const [total, setTotal] = useState("");
   const removeItem = useStore((state) => state.removeItem);
 
@@ -143,7 +143,11 @@ const FarmItemSideMenu = ({ price, uid }: FarmItemProps) => {
           type="number"
           value={amount}
           style={{ marginBottom: 13 }}
-          onChange={(e) => setAmount(e.target.value)}
+          onChange={(e) => {
+            const num = Number(e.target.value);
+            const num2 = Number(quantity);
+            setAmount(num > num2 ? num2 : num);
+          }}
         />
         <div style={{ marginLeft: 10, fontSize: 20 }}>kg</div>
       </div>

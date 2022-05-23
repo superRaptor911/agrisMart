@@ -28,7 +28,7 @@ const SliderImage = () => {
 
   return (
     <img
-      className={index % 2 == 0 ? "slider" : "slider2"}
+      className={index % 2 == 0 ? "slideImage" : "sliderImage2"}
       style={{ width: "615px", height: "412px", borderRadius: 15 }}
       src={images[index]}
     />

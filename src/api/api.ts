@@ -1,5 +1,14 @@
 import { initializeApp } from "firebase/app";
-import { addDoc, doc, getDoc, getFirestore, setDoc } from "firebase/firestore";
+import {
+  addDoc,
+  deleteDoc,
+  doc,
+  getDoc,
+  getFirestore,
+  query,
+  setDoc,
+  where,
+} from "firebase/firestore";
 import { collection, getDocs } from "firebase/firestore";
 import {
   getAuth,
@@ -145,6 +154,35 @@ export async function api_addItem(
       console.log("user is ", user);
     } else {
       throw "Please signin";
+    }
+  } catch (e) {
+    /* handle error */
+    console.error("api::error", e);
+  }
+}
+
+export async function api_deleteItem(uid: string) {
+  try {
+    const db = getFirestore(firebaseApp);
+    const user = auth.currentUser;
+    if (user) {
+      const itemRef = collection(db, "items");
+
+      // Create a query against the collection.
+      const q = query(itemRef, where("uid", "==", uid));
+      const querySnapshot = await getDocs(q);
+      const ids: any = [];
+      querySnapshot.forEach((doc) => {
+        // deleteDoc(doc(db, "items"))
+        ids.push(doc.id);
+        console.log(doc.id, " => ", doc.data());
+      });
+
+      for (const i of ids) {
+        await deleteDoc(doc(db, "items", i));
+      }
+    } else {
+      throw "Failed to delete";
     }
   } catch (e) {
     /* handle error */

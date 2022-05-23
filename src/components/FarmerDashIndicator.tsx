@@ -121,6 +121,7 @@ const getmoistText = (val: number | string) => {
 
 const FarmerDashIndicator = () => {
   const [items, setItems] = useState<IndicatorBoxProps[]>([]);
+  const [isChecked, setIsChecked] = useState(false);
 
   const updateData = async () => {
     const item = await api_readSensorData();
@@ -165,6 +166,44 @@ const FarmerDashIndicator = () => {
           text={item.text}
         />
       ))}
+
+      <div
+        style={{
+          width: "148px",
+          height: "148px",
+          background: "#76B3C6",
+          boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+          borderRadius: "30px",
+          position: "relative",
+          top: -212,
+          left: 400,
+        }}
+      >
+        <div
+          style={{
+            fontFamily: "'Roboto'",
+            fontStyle: "normal",
+            fontWeight: "600",
+            fontSize: "20px",
+            lineHeight: "23px",
+            color: "#000000",
+            marginTop: 25,
+            marginBottom: 8,
+            textAlign: "center",
+          }}
+        >
+          Sprinkler
+        </div>
+
+        <label className="switch">
+          <input
+            type="checkbox"
+            checked={isChecked}
+            onChange={(e) => setIsChecked(e.target.checked)}
+          />
+          <span className="slider round"></span>
+        </label>
+      </div>
     </div>
   );
 };

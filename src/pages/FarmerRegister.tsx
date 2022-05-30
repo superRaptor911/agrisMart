@@ -18,6 +18,10 @@ const FarmerRegister = () => {
       setError("Please fill all fields");
       return;
     }
+    if (Number(number) < 1000000000 || Number(number) > 9999999999) {
+      setError("Please input valid phone number");
+      return;
+    }
 
     try {
       const uid = await api_registerUSer(name, "", email, password);
